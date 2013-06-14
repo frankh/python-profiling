@@ -1,6 +1,5 @@
-
 def profile(func):
-  import cProfile as profile
+	import cProfile as profile
 	from StringIO import StringIO
 	import pstats
 	import functools
@@ -23,10 +22,8 @@ def profile(func):
 
 		s.seek(0)
 		for l in s.readlines():
-			print '@@@',l
+			print '@@@',l,
 
 		return ret
 
 	return wrapper
-
-@profile
