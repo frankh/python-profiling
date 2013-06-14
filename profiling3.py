@@ -1,25 +1,25 @@
 def profile(func):
-  import profile
-	from io import StringIO
-	import pstats
-	import functools
+        import cProfile as profile
+        from io import StringIO
+        import pstats
+        import functools
 
-	@functools.wraps(func)
-	def wrapper(*args, **kwargs):
-		pr = profile.Profile()
-		pr.enable()
-		
-		ret = func(*args, **kwargs)
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+                pr = profile.Profile()
+                pr.enable()
 
-		pr.disable()
-		s = StringIO()
-		ps = pstats.Stats(pr)
-		ps.sort_stats('time')
-		ps.print_stats(20)
+                ret = func(*args, **kwargs)
 
-		ps.sort_stats('cumulative')
-		ps.print_stats(10)
+                pr.disable()
+                s = StringIO()
+                ps = pstats.Stats(pr)
+                ps.sort_stats('time')
+                ps.print_stats(20)
 
-		return ret
+                ps.sort_stats('cumulative')
+                ps.print_stats(10)
 
-	return wrapper
+                return ret
+
+        return wrapper
